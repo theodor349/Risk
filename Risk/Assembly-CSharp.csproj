@@ -54,11 +54,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Continent.cs" />
-     <Compile Include="Assets\Scripts\LineController.cs" />
+     <Compile Include="Assets\Scripts\Controller\GameController.cs" />
+     <Compile Include="Assets\Scripts\Controller\LineController.cs" />
+     <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
+     <Compile Include="Assets\Scripts\Controller\TextController.cs" />
      <Compile Include="Assets\Scripts\Link.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Province.cs" />
-     <Compile Include="Assets\Scripts\TextController.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

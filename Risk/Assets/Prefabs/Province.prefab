@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4584708562523906466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TextPlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 9110814442316790920}
   - component: {fileID: 9110814442316790926}
   - component: {fileID: 9110814442316790921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Province
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,5 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3b0662e52cbd4e99cf29e14171f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  links: []
+  borderProvinces: []
   textPos: {fileID: 4584708562523906466}

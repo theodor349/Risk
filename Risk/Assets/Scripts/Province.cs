@@ -18,8 +18,8 @@ public class Province : MonoBehaviour
     public int Soldiers {
         get { return army; }
         set {
-            army = value;
-            UpdateUI();
+            army = value <= 0 ? 0 : value;
+            UpdateProvince();
         }
     }
 
@@ -27,7 +27,7 @@ public class Province : MonoBehaviour
         get { return player; }
         set {
             player = value;
-            UpdateUI();
+            UpdateProvince();
         }
     }
 
@@ -36,6 +36,7 @@ public class Province : MonoBehaviour
         provinceSprite = GetComponent<SpriteRenderer>();
         armyText = TextController.Instance.SetupText(textPos.position);
         GenerateLinks();
+        gameObject.AddComponent<PolygonCollider2D>();
     }
 
     private void GenerateLinks()
@@ -62,6 +63,11 @@ public class Province : MonoBehaviour
         return false;
     }
 
+    private void UpdateProvince()
+    {
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         if (army == 0)
@@ -82,9 +88,28 @@ public class Province : MonoBehaviour
         armyText.text = army.ToString();
     }
 
-    private void DrawLink()
+    public bool CanAttack()
     {
-
+        return Soldiers > 1;
     }
 
+    public bool Neighbours(Province other)
+    {
+        foreach (var link in links)
+        {
+            if (link.GetOther(this) == other)
+                return true;
+        }
+        return false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Soldiers -= damage;
+    }
+
+    public int Strength(bool isDefending = false)
+    {
+        return isDefending ? Soldiers : Soldiers - 1;
+    }
 }
