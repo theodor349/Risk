@@ -72,13 +72,12 @@ public static class FigthState
         defender = other;
 
         // Create Battle Window and call Battle Done when damage is found (Action)
+        PopUpController.Instance.StartBattle(attacker, other, BattleDone);
     }
 
-    public static void BattleDone(Tuple<int, int> damage)
+    public static void BattleDone()
     {
-        attacker.TakeDamage(damage.Item1);
-        defender.TakeDamage(damage.Item2);
-
+        Debug.Log("Battle Done");
         if (defender.Soldiers < 1)
         {
             // Create Transfer Window and call TransferArmy when amount is found (Action)

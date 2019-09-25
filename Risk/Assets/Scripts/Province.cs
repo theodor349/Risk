@@ -6,6 +6,7 @@ using TMPro;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Province : MonoBehaviour
 {
+    public string provinceName;
     [SerializeField] private Province[] borderProvinces;
     [SerializeField] private Transform textPos;
     private TextMeshProUGUI armyText;
