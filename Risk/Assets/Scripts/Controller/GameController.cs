@@ -72,32 +72,26 @@ public static class FigthState
         defender = other;
 
         // Create Battle Window and call Battle Done when damage is found (Action)
-        PopUpController.Instance.StartBattle(attacker, other, BattleDone);
+        PopUpController.Instance.StartBattle(attacker, other, FightDone);
     }
 
-    public static void BattleDone()
+    public static void FightDone()
     {
-        Debug.Log("Battle Done");
         if (defender.Soldiers < 1)
         {
+            defender.Player = attacker.Player;
+            defender.Soldiers = 1;
+            attacker.Soldiers -= 1;
             // Create Transfer Window and call TransferArmy when amount is found (Action)
+            PopUpController.Instance.StartTransfer(attacker, defender, BattleDone);
         }
         else
             ResetBattle();
     }
 
-    public static void TransferArmy(int amount)
+    public static void BattleDone()
     {
-        defender.Player = attacker.Player;
-        defender.Soldiers = amount;
-        attacker.Soldiers -= amount;
-
+        Debug.Log("Battle Done");
         ResetBattle();
-    }
-
-    private static Tuple<int, int> GetBattleDamage(Province attacker, Province defender)
-    {
-        int d = defender.Strength(true) > attacker.Strength() ? attacker.Strength() : defender.Strength(true);
-        return new Tuple<int, int>(d, d);
     }
 }

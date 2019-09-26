@@ -36,11 +36,11 @@ public class PopUpBattle : MonoBehaviour
 
         atkImage.color = atk.Player.Color;
         atkArmy.text = (atk.Soldiers - 1).ToString();
-        atkProvince.text = atk.provinceName;
+        atkProvince.text = "Attacker\n" +  atk.provinceName;
 
         defImage.color = def.Player.Color;
         defArmy.text = (def.Soldiers).ToString();
-        defProvince.text = def.provinceName;
+        defProvince.text = "Defender\n" + def.provinceName;
 
         // Set Dice
         atkDice2.transform.parent.gameObject.SetActive(atk.Soldiers > 2);
@@ -50,12 +50,12 @@ public class PopUpBattle : MonoBehaviour
 
     public void Retreate()
     {
-        popUpController.BattleDone();
+        popUpController.EndBattle();
     }
 
     private void BattleWon()
     {
-        popUpController.BattleDone();
+        popUpController.EndBattle();
     }
 
     public void Fight()

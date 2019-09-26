@@ -21,7 +21,7 @@ public class Continent : MonoBehaviour
         foreach (var p in provineces)
         {
             p.Player = new Player(Random.Range(1,10) > 5 ? Color.red : Color.green);
-            p.Soldiers = Random.Range(1, 100);
+            p.Soldiers = Random.Range(1, 10);
         }
     }
 }

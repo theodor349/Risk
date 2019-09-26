@@ -8,6 +8,8 @@ public class PopUpController : MonoBehaviour
     public static PopUpController Instance;
 
     [SerializeField] private PopUpBattle battle;
+    [SerializeField] private PopUpTransfer transfer;
+
     private Action returnFuntion;
 
     private void Awake()
@@ -15,6 +17,7 @@ public class PopUpController : MonoBehaviour
         Instance = this;
     }
 
+    // Battle
     public void StartBattle(Province atk, Province def, Action returnFuntion)
     {
         this.returnFuntion = returnFuntion;
@@ -22,10 +25,23 @@ public class PopUpController : MonoBehaviour
         battle.gameObject.SetActive(true);
         battle.SetupBattle(atk, def);
     }
-
-    public void BattleDone()
+    public void EndBattle()
     {
         battle.gameObject.SetActive(false);
+        returnFuntion?.Invoke();
+    }
+
+    // Transfer
+    public void StartTransfer(Province from, Province to, Action returnFuntion)
+    {
+        this.returnFuntion = returnFuntion;
+
+        transfer.gameObject.SetActive(true);
+        transfer.SetupTransfer(from, to);
+    }
+    public void EndTransfer()
+    {
+        transfer.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
 }
