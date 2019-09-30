@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-public class PopUpTransfer : MonoBehaviour
+public class PopUpReinforce : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI fromProvinceName;
     [SerializeField] private TextMeshProUGUI fromArmySize;
     [SerializeField] private TextMeshProUGUI toProvinceName;
     [SerializeField] private TextMeshProUGUI toArmySize;
     [SerializeField] private Slider slider;
 
-    private Province from;
     private Province to;
-    private int fromStartAmount;
+    private int reinforceStartAmount;
     private int toStartAmount;
     private PopUpController popUpController;
 
@@ -24,11 +21,10 @@ public class PopUpTransfer : MonoBehaviour
         popUpController = PopUpController.Instance;
     }
 
-    public void SetupTransfer(Province from, Province to)
+    public void SetupReinforce(Province to)
     {
-        this.from = from;
         this.to = to;
-        fromStartAmount = from.Soldiers;
+        reinforceStartAmount = to.Player.Reinforcements;
         toStartAmount = to.Soldiers;
         slider.value = 0;
 
@@ -37,13 +33,13 @@ public class PopUpTransfer : MonoBehaviour
 
     public void Okay()
     {
-        popUpController.EndTransfer();
+        popUpController.EndReinforce();
     }
 
     public void OnSliderChange()
     {
-        int moveAmount = (int)((fromStartAmount - 1) * slider.value);
-        from.Soldiers = fromStartAmount - moveAmount;
+        int moveAmount = (int)(reinforceStartAmount * slider.value);
+        to.Player.Reinforcements = reinforceStartAmount - moveAmount;
         to.Soldiers = toStartAmount + moveAmount;
 
         UpdateUI();
@@ -51,8 +47,7 @@ public class PopUpTransfer : MonoBehaviour
 
     private void UpdateUI()
     {
-        fromProvinceName.text = from.provinceName;
-        fromArmySize.text = from.Soldiers.ToString();
+        fromArmySize.text = to.Player.Reinforcements.ToString();
         toProvinceName.text = to.provinceName;
         toArmySize.text = to.Soldiers.ToString();
     }

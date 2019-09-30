@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player
 {
     public Color Color { get; private set; }
+    public int Reinforcements = 10;
 
     public Player(Color color)
     {

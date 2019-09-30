@@ -9,6 +9,7 @@ public class PopUpController : MonoBehaviour
 
     [SerializeField] private PopUpBattle battle;
     [SerializeField] private PopUpTransfer transfer;
+    [SerializeField] private PopUpReinforce reinforce;
 
     private Action returnFuntion;
 
@@ -42,6 +43,20 @@ public class PopUpController : MonoBehaviour
     public void EndTransfer()
     {
         transfer.gameObject.SetActive(false);
+        returnFuntion?.Invoke();
+    }
+
+    // Reinforce
+    public void StartReinforce(Province to, Action returnFuntion)
+    {
+        this.returnFuntion = returnFuntion;
+
+        reinforce.gameObject.SetActive(true);
+        reinforce.SetupReinforce(to);
+    }
+    public void EndReinforce()
+    {
+        reinforce.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
 }
