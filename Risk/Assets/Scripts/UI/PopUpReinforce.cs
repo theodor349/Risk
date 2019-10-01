@@ -26,13 +26,16 @@ public class PopUpReinforce : MonoBehaviour
         this.to = to;
         reinforceStartAmount = to.Player.Reinforcements;
         toStartAmount = to.Soldiers;
-        slider.value = 0;
+        slider.value = 1;
 
-        UpdateUI();
+        OnSliderChange();
     }
 
     public void Okay()
     {
+        if (to.Player.Reinforcements == 0)
+            ReinforcetState.DoneReinforcing = true;
+
         popUpController.EndReinforce();
     }
 

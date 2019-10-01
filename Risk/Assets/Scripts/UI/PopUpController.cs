@@ -21,16 +21,17 @@ public class PopUpController : MonoBehaviour
     // UI
     private void OpenUI()
     {
-
+        GameController.PopUp = true;
     }
     private void EndUI()
     {
-
+        GameController.PopUp = false;
     }
 
     // Battle
     public void StartBattle(Province atk, Province def, Action returnFuntion)
     {
+        OpenUI();
         this.returnFuntion = returnFuntion;
 
         battle.gameObject.SetActive(true);
@@ -38,6 +39,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndBattle()
     {
+        EndUI();
         battle.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
@@ -45,6 +47,7 @@ public class PopUpController : MonoBehaviour
     // Transfer
     public void StartTransfer(Province from, Province to, Action returnFuntion)
     {
+        OpenUI();
         this.returnFuntion = returnFuntion;
 
         transfer.gameObject.SetActive(true);
@@ -52,6 +55,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndTransfer()
     {
+        EndUI();
         transfer.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
@@ -59,6 +63,7 @@ public class PopUpController : MonoBehaviour
     // Reinforce
     public void StartReinforce(Province to, Action returnFuntion)
     {
+        OpenUI();
         this.returnFuntion = returnFuntion;
 
         reinforce.gameObject.SetActive(true);
@@ -66,6 +71,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndReinforce()
     {
+        EndUI();
         reinforce.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }

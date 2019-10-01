@@ -39,7 +39,6 @@ public class Province : MonoBehaviour
     {
         provinceName = gameObject.name;
         TextPos = gameObject.transform.GetChild(0).transform;
-        Debug.Log(TextPos.name);
 
         provinceSprite = GetComponent<SpriteRenderer>();
         armyText = TextController.Instance.SetupText(TextPos.position);

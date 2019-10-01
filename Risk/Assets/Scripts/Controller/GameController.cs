@@ -2,11 +2,13 @@
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public enum GameState { Reinforce, Battle, Transfer }
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
+    public static bool PopUp;
 
     [SerializeField] private GameObject map;
     [SerializeField] private Image playerImage;
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
         players = new List<Player>();
         players.Add(new Player(Color.green));
         players.Add(new Player(Color.red));
+        players.Add(new Player(Color.blue));
 
         foreach (var continent in continents)
         {
@@ -47,6 +50,9 @@ public class GameController : MonoBehaviour
 
     public void ProvinceClicked(Province p)
     {
+        if (PopUp)
+            return;
+
         if (state == GameState.Battle)
         {
             BattleState.ProvinceClicked(p, players[activePlayer]);
@@ -63,6 +69,9 @@ public class GameController : MonoBehaviour
 
     internal void RightClick()
     {
+        if (PopUp)
+            return;
+
         if (state == GameState.Battle)
         {
             BattleState.RightClick();
@@ -153,6 +162,8 @@ public class GameController : MonoBehaviour
 
 public static class ReinforcetState
 {
+    public static bool DoneReinforcing = false;
+
     public static void RightClick()
     {
     }
@@ -167,6 +178,10 @@ public static class ReinforcetState
 
     public static void ReinforcementDone()
     {
+        if (DoneReinforcing)
+            GameController.Instance.PlayerDone();
+
+        DoneReinforcing = false;
     }
 }
 
@@ -236,6 +251,8 @@ public static class BattleState
 
 public static class TransferState
 {
+    public static bool DidTransfer = false;
+
     private static Province from;
 
     public static void RightClick()
@@ -245,6 +262,8 @@ public static class TransferState
 
     public static void ProvinceClicked(Province p, Player activePlayer)
     {
+        DidTransfer = false;
+
         if (from == null)
         {
             if (p.Player != activePlayer)
@@ -261,6 +280,7 @@ public static class TransferState
     private static void ResetTransfer()
     {
         from = null;
+        DidTransfer = false;
     }
 
     private static void Transfer(Province to)
@@ -279,6 +299,9 @@ public static class TransferState
 
     private static void TransferDone()
     {
+        if (DidTransfer)
+            GameController.Instance.PlayerDone();
+
         ResetTransfer();
     }
 }

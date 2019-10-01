@@ -1715,7 +1715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3b0662e52cbd4e99cf29e14171f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderProvinces: []
+  borderProvinces:
+  - {fileID: 1732795333}
+  - {fileID: 1702129046}
 --- !u!212 &220763970
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8902,6 +8904,7 @@ MonoBehaviour:
   borderProvinces:
   - {fileID: 1910609102}
   - {fileID: 220763969}
+  - {fileID: 1560401442}
 --- !u!212 &1352444243
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10774,7 +10777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3b0662e52cbd4e99cf29e14171f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderProvinces: []
+  borderProvinces:
+  - {fileID: 1530543484}
 --- !u!1 &1646116621
 GameObject:
   m_ObjectHideFlags: 0
@@ -12235,7 +12239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef3b0662e52cbd4e99cf29e14171f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderProvinces: []
+  borderProvinces:
+  - {fileID: 1560401442}
 --- !u!212 &1910609103
 SpriteRenderer:
   m_ObjectHideFlags: 0

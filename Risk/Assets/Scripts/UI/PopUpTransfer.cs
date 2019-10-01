@@ -30,13 +30,19 @@ public class PopUpTransfer : MonoBehaviour
         this.to = to;
         fromStartAmount = from.Soldiers;
         toStartAmount = to.Soldiers;
-        slider.value = 0;
+        slider.value = 1;
 
-        UpdateUI();
+        OnSliderChange();
     }
 
     public void Okay()
     {
+        // Did transfer soldiers
+        if (slider.value != 0)
+        {
+            TransferState.DidTransfer = true;
+        }
+
         popUpController.EndTransfer();
     }
 
