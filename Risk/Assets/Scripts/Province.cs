@@ -6,9 +6,9 @@ using TMPro;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Province : MonoBehaviour
 {
-    public string provinceName;
+    public string provinceName { get; private set; }
     [SerializeField] private Province[] borderProvinces;
-    [SerializeField] private Transform textPos;
+    public Transform TextPos { get; private set; }
     private TextMeshProUGUI armyText;
     private SpriteRenderer provinceSprite;
 
@@ -27,15 +27,22 @@ public class Province : MonoBehaviour
     public Player Player {
         get { return player; }
         set {
+            if (player != null)
+                player.Provinces--;
             player = value;
+            player.Provinces++;
             UpdateProvince();
         }
     }
 
     private void Awake()
     {
+        provinceName = gameObject.name;
+        TextPos = gameObject.transform.GetChild(0).transform;
+        Debug.Log(TextPos.name);
+
         provinceSprite = GetComponent<SpriteRenderer>();
-        armyText = TextController.Instance.SetupText(textPos.position);
+        armyText = TextController.Instance.SetupText(TextPos.position);
         GenerateLinks();
         gameObject.AddComponent<PolygonCollider2D>();
     }

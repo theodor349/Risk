@@ -18,6 +18,16 @@ public class PopUpController : MonoBehaviour
         Instance = this;
     }
 
+    // UI
+    private void OpenUI()
+    {
+
+    }
+    private void EndUI()
+    {
+
+    }
+
     // Battle
     public void StartBattle(Province atk, Province def, Action returnFuntion)
     {

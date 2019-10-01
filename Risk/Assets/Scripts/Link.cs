@@ -18,6 +18,6 @@ public class Link
 
     public KeyValuePair<Vector2, Vector2> GetEndPoints()
     {
-        return new KeyValuePair<Vector2, Vector2>(link[0].transform.position, link[1].transform.position);
+        return new KeyValuePair<Vector2, Vector2>(link[0].TextPos.position, link[1].TextPos.position);
     }
 }

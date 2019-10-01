@@ -1,45 +1,46 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public enum GameState { Reinforce, Battle, Transfer }
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    [SerializeField] private GameObject map;
     [SerializeField] private Image playerImage;
     [SerializeField] private TextMeshProUGUI stateText;
 
-    [SerializeField] private Continent[] continents;
-
+    private Continent[] continents;
     private GameState state;
-    private Player[] players;
+    private List<Player> players;
     private int activePlayer;
+    private int playersKilled = 0;
 
     private void Awake()
     {
         Instance = this;
+
+        continents = map.GetComponentsInChildren<Continent>();
     }
 
     private void Start()
     {
-        players = new Player[2];
-        players[0] = new Player(Color.green);
-        players[1] = new Player(Color.red);
+        players = new List<Player>();
+        players.Add(new Player(Color.green));
+        players.Add(new Player(Color.red));
 
         foreach (var continent in continents)
         {
-            foreach (var province in continent.provineces)
+            foreach (var province in continent.provinces)
             {
-                int p = Random.Range(0, players.Length);
+                int p = Random.Range(0, players.Count);
                 province.Player = players[p];
                 province.Soldiers = 1;
             }
         }
-    }
 
-    private void Update()
-    {
         playerImage.color = players[activePlayer].Color;
         stateText.text = state.ToString();
     }
@@ -78,20 +79,33 @@ public class GameController : MonoBehaviour
 
     public void PlayerDone()
     {
-        if (!CanEndTurn())
+        if (!CanEndTurn(players[activePlayer]))
             return;
 
         activePlayer++;
-        if(activePlayer == players.Length)
+        if(activePlayer == players.Count)
         {
             activePlayer = 0;
             NextState();
         }
+
+        // In case the player is dead
+        if (players[activePlayer].Provinces == 0)
+        {
+            activePlayer++;
+            if (activePlayer == players.Count)
+            {
+                activePlayer = 0;
+                NextState();
+            }
+        }
+
+        playerImage.color = players[activePlayer].Color;
     }
 
-    private bool CanEndTurn()
+    private bool CanEndTurn(Player player)
     {
-        return !(state == GameState.Reinforce && players[activePlayer].Reinforcements > 0);
+        return !(state == GameState.Reinforce && player.Reinforcements > 0);
     }
 
     private void NextState()
@@ -109,14 +123,31 @@ public class GameController : MonoBehaviour
                 CalculateReinforcements();
                 break;
         }
+
+        stateText.text = state.ToString();
     }
 
     private void CalculateReinforcements()
     {
         foreach (var player in players)
         {
-            player.Reinforcements = 10;
+            player.Reinforcements = player.Provinces / 3;
         }
+
+        ReinforcementsFromContinents();
+    }
+
+    private void ReinforcementsFromContinents()
+    {
+        foreach (var continent in continents)
+        {
+            continent.AddReinforcements();
+        }
+    }
+
+    internal void KillPlayer(Player player)
+    {
+        playersKilled++;
     }
 }
 
