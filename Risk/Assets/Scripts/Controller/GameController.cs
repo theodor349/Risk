@@ -110,6 +110,7 @@ public class GameController : MonoBehaviour
         }
 
         playerImage.color = players[activePlayer].Color;
+        AudioController.Instance.PlayNext();
     }
 
     private bool CanEndTurn(Player player)
@@ -157,6 +158,11 @@ public class GameController : MonoBehaviour
     internal void KillPlayer(Player player)
     {
         playersKilled++;
+    }
+
+    public void OpenCards()
+    {
+        PopUpController.Instance.OpenCards(players[activePlayer]);
     }
 }
 
@@ -218,7 +224,10 @@ public static class BattleState
     private static void Battle(Province other)
     {
         if (other.Player == attacker.Player)
+        {
+            attacker = other;
             return;
+        }
         if (!attacker.CanAttack())
             return;
         if (!attacker.Neighbours(other))

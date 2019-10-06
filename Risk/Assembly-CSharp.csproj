@@ -53,10 +53,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\Continent.cs" />
+     <Compile Include="Assets\Scripts\Controller\AudioController.cs" />
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
      <Compile Include="Assets\Scripts\Controller\LineController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
+     <Compile Include="Assets\Scripts\Controller\PopUpCard.cs" />
      <Compile Include="Assets\Scripts\Controller\TextController.cs" />
      <Compile Include="Assets\Scripts\Link.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

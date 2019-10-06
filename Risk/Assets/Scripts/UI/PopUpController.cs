@@ -10,6 +10,7 @@ public class PopUpController : MonoBehaviour
     [SerializeField] private PopUpBattle battle;
     [SerializeField] private PopUpTransfer transfer;
     [SerializeField] private PopUpReinforce reinforce;
+    [SerializeField] private PopUpCard cards;
 
     private Action returnFuntion;
 
@@ -74,5 +75,16 @@ public class PopUpController : MonoBehaviour
         EndUI();
         reinforce.gameObject.SetActive(false);
         returnFuntion?.Invoke();
+    }
+
+    // Cards
+    internal void OpenCards(Player player)
+    {
+        cards.gameObject.SetActive(true);
+        cards.Open(player);
+    }
+    public void CloseCards()
+    {
+        cards.gameObject.SetActive(false);
     }
 }
