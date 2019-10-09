@@ -66,15 +66,15 @@ public class PopUpBattle : MonoBehaviour
         defDice2.transform.parent.gameObject.SetActive(def.Soldiers > 1 && atk.Soldiers > 2);
 
         // Calculate Outcome
-        atkDice1.text = Random.Range(1, 6).ToString();
+        atkDice1.text = Random.Range(1, 7).ToString();
         if(atk.Soldiers > 2)
-            atkDice2.text = Random.Range(1, 6).ToString();
+            atkDice2.text = Random.Range(1, 7).ToString();
         if(atk.Soldiers > 3)
-            atkDice3.text = Random.Range(1, 6).ToString();
+            atkDice3.text = Random.Range(1, 7).ToString();
 
-        defDice1.text = Random.Range(1, 6).ToString();
+        defDice1.text = Random.Range(1, 7).ToString();
         if(def.Soldiers > 1 && atk.Soldiers > 2)
-            defDice2.text = Random.Range(1, 6).ToString();
+            defDice2.text = Random.Range(1, 7).ToString();
 
         // What is biggest value
         int attack = Mathf.Max(int.Parse(atkDice1.text), atk.Soldiers > 2 ? int.Parse(atkDice2.text) : 0, atk.Soldiers > 3 ? int.Parse(atkDice3.text) : 0);

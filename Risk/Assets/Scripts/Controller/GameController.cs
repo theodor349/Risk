@@ -33,6 +33,9 @@ public class GameController : MonoBehaviour
         players.Add(new Player(Color.green));
         players.Add(new Player(Color.red));
         players.Add(new Player(Color.blue));
+        players.Add(new Player(Color.white));
+        players.Add(new Player(Color.cyan));
+        players.Add(new Player(Color.magenta));
 
         foreach (var continent in continents)
         {
