@@ -24,7 +24,7 @@ public class PopUpController : MonoBehaviour
     {
         GameController.PopUp = true;
     }
-    private void EndUI()
+    private void CloseUI()
     {
         GameController.PopUp = false;
     }
@@ -40,7 +40,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndBattle()
     {
-        EndUI();
+        CloseUI();
         battle.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
@@ -56,7 +56,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndTransfer()
     {
-        EndUI();
+        CloseUI();
         transfer.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
@@ -72,7 +72,7 @@ public class PopUpController : MonoBehaviour
     }
     public void EndReinforce()
     {
-        EndUI();
+        CloseUI();
         reinforce.gameObject.SetActive(false);
         returnFuntion?.Invoke();
     }
@@ -80,11 +80,13 @@ public class PopUpController : MonoBehaviour
     // Cards
     internal void OpenCards(Player player)
     {
+        OpenUI();
         cards.gameObject.SetActive(true);
         cards.Open(player);
     }
     public void CloseCards()
     {
+        CloseUI();
         cards.gameObject.SetActive(false);
     }
 }

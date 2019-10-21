@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     private GameState state;
     private List<Player> players;
     private int activePlayer;
-    private int playersKilled = 0;
 
     private void Awake()
     {
@@ -32,10 +31,6 @@ public class GameController : MonoBehaviour
         players = new List<Player>();
         players.Add(new Player(Color.green));
         players.Add(new Player(Color.red));
-        players.Add(new Player(Color.blue));
-        players.Add(new Player(Color.white));
-        players.Add(new Player(Color.cyan));
-        players.Add(new Player(Color.magenta));
 
         foreach (var continent in continents)
         {
@@ -94,11 +89,12 @@ public class GameController : MonoBehaviour
         if (!CanEndTurn(players[activePlayer]))
             return;
 
+        players[activePlayer].TurnDone();
+
         activePlayer++;
         if(activePlayer == players.Count)
         {
             activePlayer = 0;
-            NextState();
         }
 
         // In case the player is dead
@@ -108,10 +104,10 @@ public class GameController : MonoBehaviour
             if (activePlayer == players.Count)
             {
                 activePlayer = 0;
-                NextState();
             }
         }
 
+        NextState();
         playerImage.color = players[activePlayer].Color;
         AudioController.Instance.PlayNext();
     }
@@ -156,11 +152,6 @@ public class GameController : MonoBehaviour
         {
             continent.AddReinforcements();
         }
-    }
-
-    internal void KillPlayer(Player player)
-    {
-        playersKilled++;
     }
 
     public void OpenCards()
@@ -248,12 +239,17 @@ public static class BattleState
             defender.Player = attacker.Player;
             defender.Soldiers = 1;
             attacker.Soldiers -= 1;
+
+            attacker.Player.GiveCard();
+
             // Create Transfer Window and call TransferArmy when amount is found (Action)
             PopUpController.Instance.StartTransfer(attacker, defender, BattleDone);
         }
         else
             ResetBattle();
     }
+
+
 
     public static void BattleDone()
     {

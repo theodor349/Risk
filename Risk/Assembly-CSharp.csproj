@@ -59,12 +59,12 @@
      <Compile Include="Assets\Scripts\Controller\GameController.cs" />
      <Compile Include="Assets\Scripts\Controller\LineController.cs" />
      <Compile Include="Assets\Scripts\Controller\MouseController.cs" />
-     <Compile Include="Assets\Scripts\Controller\PopUpCard.cs" />
      <Compile Include="Assets\Scripts\Controller\TextController.cs" />
      <Compile Include="Assets\Scripts\Link.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Province.cs" />
      <Compile Include="Assets\Scripts\UI\PopUpBattle.cs" />
+     <Compile Include="Assets\Scripts\UI\PopUpCard.cs" />
      <Compile Include="Assets\Scripts\UI\PopUpController.cs" />
      <Compile Include="Assets\Scripts\UI\PopUpReinforce.cs" />
      <Compile Include="Assets\Scripts\UI\PopUpTransfer.cs" />

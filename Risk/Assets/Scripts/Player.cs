@@ -11,16 +11,48 @@ public class Player
         }
         set {
             provinces = value;
-            if (provinces <= 0)
-                GameController.Instance.KillPlayer(this);
         }
     }
 
     public int Reinforcements = 10;
+
+    // Cards
+    public int Soldiers = 0;
+    public int Horses = 0;
+    public int Canons= 0;
+
     private int provinces;
+    private bool gottenCard;
 
     public Player(Color color)
     {
         Color = color;
+    }
+
+    public void TurnDone()
+    {
+        gottenCard = false;
+    }
+
+    public void GiveCard()
+    {
+        if (gottenCard)
+            return;
+
+        gottenCard = true;
+        switch (Random.Range(0, 3))
+        {
+            case 0:
+                Soldiers++;
+                break;
+            case 1:
+                Horses++;
+                break;
+            case 2:
+                Canons++;
+                break;
+            default:
+                break;
+        }
     }
 }
