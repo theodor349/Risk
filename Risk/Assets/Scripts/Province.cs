@@ -17,7 +17,7 @@ public class Province : MonoBehaviour
     private List<Link> links = new List<Link>();
 
     public int Soldiers {
-        get { return army; }
+        get => army;
         set {
             army = value <= 0 ? 0 : value;
             UpdateProvince();
@@ -25,7 +25,7 @@ public class Province : MonoBehaviour
     }
 
     public Player Player {
-        get { return player; }
+        get => player;
         set {
             if (player != null)
                 player.Provinces--;

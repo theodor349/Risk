@@ -11,6 +11,7 @@ public class PopUpController : MonoBehaviour
     [SerializeField] private PopUpTransfer transfer;
     [SerializeField] private PopUpReinforce reinforce;
     [SerializeField] private PopUpCard cards;
+    [SerializeField] private EndGameUI endGame;
 
     private Action returnFuntion;
 
@@ -88,5 +89,12 @@ public class PopUpController : MonoBehaviour
     {
         CloseUI();
         cards.gameObject.SetActive(false);
+    }
+
+    // EndGame
+    public void EndGame(Color winner)
+    {
+        endGame.gameObject.SetActive(true);
+        endGame.Open(winner);
     }
 }

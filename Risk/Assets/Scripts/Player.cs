@@ -5,14 +5,7 @@ using UnityEngine;
 public class Player
 {
     public Color Color { get; private set; }
-    public int Provinces {
-        get {
-            return provinces;
-        }
-        set {
-            provinces = value;
-        }
-    }
+    public int Provinces { get; set; }
 
     public int Reinforcements = 10;
 
@@ -21,7 +14,6 @@ public class Player
     public int Horses = 0;
     public int Canons= 0;
 
-    private int provinces;
     private bool gottenCard;
 
     public Player(Color color)

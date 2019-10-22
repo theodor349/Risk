@@ -34,7 +34,7 @@ public class PopUpReinforce : MonoBehaviour
     public void Okay()
     {
         if (to.Player.Reinforcements == 0)
-            ReinforcetState.DoneReinforcing = true;
+            ReinforceState.DoneReinforcing = true;
 
         popUpController.EndReinforce();
     }

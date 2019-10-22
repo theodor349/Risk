@@ -23,7 +23,6 @@ public class PopUpCard : MonoBehaviour
     [SerializeField] private GameObject horsePrefab;
     [SerializeField] private GameObject canonPrefab;
 
-
     private Player player;
     private List<GameObject> selectedCards = new List<GameObject>();
     private List<CardType> selectedTypes = new List<CardType>();
@@ -49,14 +48,16 @@ public class PopUpCard : MonoBehaviour
 
     public void BtnOkay()
     {
-        player.Reinforcements += CalculateExtraSoldiers();
+        int reinforcements = CalculateExtraSoldiers();
+        player.Reinforcements += reinforcements;
+        if(reinforcements == 0)
+            GiveBackCardsToPlayer();
         Reset();
         PopUpController.Instance.CloseCards();
     }
 
     public void BtnReset()
     {
-        GiveBackCardsToPlayer();
         Reset();
     }
 
@@ -96,7 +97,7 @@ public class PopUpCard : MonoBehaviour
             default:
                 break;
         }
-
+        go.transform.localScale = Vector3.one;
         UpdateUI();
     }
 

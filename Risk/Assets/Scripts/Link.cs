@@ -8,7 +8,7 @@ public class Link
 
     public Link(Province a, Province b)
     {
-        link = new Province[] { a, b };
+        link = new[] { a, b };
     }
 
     public Province GetOther(Province from)

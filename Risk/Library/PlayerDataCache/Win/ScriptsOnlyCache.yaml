@@ -3,14 +3,17 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AudioController
     - Continent
+    - EndGameUI
     - GameController
     - LineController
     - MouseController
     - PopUpBattle
+    - PopUpCard
     - PopUpController
     - PopUpReinforce
     - PopUpTransfer
     - Province
+    - StartMenuController
     - TextController
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
@@ -19,6 +22,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.TextMeshPro.dll:
+    - TMPro.TMP_Dropdown
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
@@ -35,11 +39,15 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.RawImage
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Slider
+    - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/GameScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -67,17 +75,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9672}
     - Class: 114
+      Script: {instanceID: 9684}
+    - Class: 114
+      Script: {instanceID: 9718}
+    - Class: 114
+      Script: {instanceID: 9838}
+    - Class: 114
       Script: {instanceID: 9876}
     - Class: 114
       Script: {instanceID: 10080}
     - Class: 114
       Script: {instanceID: 10128}
     - Class: 114
+      Script: {instanceID: 10182}
+    - Class: 114
       Script: {instanceID: 10278}
     - Class: 114
       Script: {instanceID: 10298}
     - Class: 114
       Script: {instanceID: 10422}
+    - Class: 114
+      Script: {instanceID: 10452}
     - Class: 114
       Script: {instanceID: 10494}
     - Class: 114
@@ -115,7 +133,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11518}
     - Class: 114
+      Script: {instanceID: 11536}
+    - Class: 114
       Script: {instanceID: 11554}
+    - Class: 114
+      Script: {instanceID: 19316}
+    - Class: 114
+      Script: {instanceID: 89482}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -143,7 +167,7 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 0591ea4e5cc078f4207be54b65546a3f
+      Hash: 489e0f53a2875c3b4728d14f7ed5dcd0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PopUpCard
@@ -407,7 +431,7 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 698bec18aac7c6904e9b1993794c18eb
+      Hash: b483fecbc098db69f32c572d63b7ba03
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PopUpController
@@ -621,7 +645,19 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 84ee347af52364f6c569943f7abcb17e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartMenuController
+  - hash:
+      serializedVersion: 2
+      Hash: 23ad83156909cb62b9901cbde22f40b6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EndGameUI
   platform: 5
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/GameScene.unity
   playerPath: C:/Users/theod/Desktop/Risk.exe

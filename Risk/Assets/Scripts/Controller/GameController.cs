@@ -2,13 +2,12 @@
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 
 public enum GameState { Reinforce, Battle, Transfer }
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
-    public static bool PopUp;
+    public static bool PopUp = true;
 
     [SerializeField] private GameObject map;
     [SerializeField] private Image playerImage;
@@ -26,11 +25,9 @@ public class GameController : MonoBehaviour
         continents = map.GetComponentsInChildren<Continent>();
     }
 
-    private void Start()
+    public void StartGame(List<Player> players)
     {
-        players = new List<Player>();
-        players.Add(new Player(Color.green));
-        players.Add(new Player(Color.red));
+        this.players = players;
 
         foreach (var continent in continents)
         {
@@ -44,6 +41,8 @@ public class GameController : MonoBehaviour
 
         playerImage.color = players[activePlayer].Color;
         stateText.text = state.ToString();
+
+        PopUp = false;
     }
 
     public void ProvinceClicked(Province p)
@@ -51,17 +50,17 @@ public class GameController : MonoBehaviour
         if (PopUp)
             return;
 
-        if (state == GameState.Battle)
+        switch (state)
         {
-            BattleState.ProvinceClicked(p, players[activePlayer]);
-        }
-        else if (state == GameState.Transfer)
-        {
-            TransferState.ProvinceClicked(p, players[activePlayer]);
-        }
-        else if (state == GameState.Reinforce)
-        {
-            ReinforcetState.ProvinceClicked(p, players[activePlayer]);
+            case GameState.Battle:
+                BattleState.ProvinceClicked(p, players[activePlayer]);
+                break;
+            case GameState.Transfer:
+                TransferState.ProvinceClicked(p, players[activePlayer]);
+                break;
+            case GameState.Reinforce:
+                ReinforceState.ProvinceClicked(p, players[activePlayer]);
+                break;
         }
     }
 
@@ -70,17 +69,17 @@ public class GameController : MonoBehaviour
         if (PopUp)
             return;
 
-        if (state == GameState.Battle)
+        switch (state)
         {
-            BattleState.RightClick();
-        }
-        else if (state == GameState.Transfer)
-        {
-            TransferState.RightClick();
-        }
-        else if (state == GameState.Reinforce)
-        {
-            ReinforcetState.RightClick();
+            case GameState.Battle:
+                BattleState.RightClick();
+                break;
+            case GameState.Transfer:
+                TransferState.RightClick();
+                break;
+            case GameState.Reinforce:
+                ReinforceState.RightClick();
+                break;
         }
     }
 
@@ -91,25 +90,48 @@ public class GameController : MonoBehaviour
 
         players[activePlayer].TurnDone();
 
+        bool nextStage = false;
         activePlayer++;
         if(activePlayer == players.Count)
         {
             activePlayer = 0;
+            nextStage = true;
         }
 
         // In case the player is dead
-        if (players[activePlayer].Provinces == 0)
+        while (players[activePlayer].Provinces == 0)
         {
             activePlayer++;
             if (activePlayer == players.Count)
             {
                 activePlayer = 0;
+                nextStage = true;
             }
         }
 
-        NextState();
+        if(nextStage)
+            NextState();
+
         playerImage.color = players[activePlayer].Color;
         AudioController.Instance.PlayNext();
+    }
+
+    private void EndGame()
+    {
+        PopUpController.Instance.EndGame(GetWinner());
+    }
+
+    private Color GetWinner()
+    {
+        Color c = Color.black;
+
+        foreach (var player in players)
+        {
+            if (player.Provinces != 0)
+                c = player.Color;
+        }
+
+        return c;
     }
 
     private bool CanEndTurn(Player player)
@@ -158,9 +180,22 @@ public class GameController : MonoBehaviour
     {
         PopUpController.Instance.OpenCards(players[activePlayer]);
     }
+
+    public void CheckGameOver()
+    {
+        int alive = 0;
+        foreach (var player in players)
+        {
+            if (player.Provinces > 0)
+                alive++;
+        }
+
+        if(alive == 1)
+            EndGame();
+    }
 }
 
-public static class ReinforcetState
+public static class ReinforceState
 {
     public static bool DoneReinforcing = false;
 
@@ -247,9 +282,9 @@ public static class BattleState
         }
         else
             ResetBattle();
+
+        GameController.Instance.CheckGameOver();
     }
-
-
 
     public static void BattleDone()
     {
